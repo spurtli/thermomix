@@ -1,6 +1,6 @@
 {
   "name": "react-oauth-provider",
-  "version": "1.0.0",
+  "version": "0.0.0-development",
   "description": "A context based auth provider for React apps.",
   "main": "lib/index.js",
   "module": "lib/index.module.js",
@@ -12,7 +12,8 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "watch": "rollup -c rollup.config.ts --watch"
+    "watch": "rollup -c rollup.config.ts --watch",
+    "semantic-release": "semantic-release"
   },
   "precommit": [
     "lint:format",
@@ -20,7 +21,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/spurtli/react-oauth-provider.git"
+    "url": "https://github.com/spurtli/react-oauth-provider.git"
   },
   "keywords": [
     "Authentication"
@@ -57,6 +58,7 @@
     "rollup-plugin-commonjs": "^9.2.0",
     "rollup-plugin-node-resolve": "^4.0.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "typescript": "^3.2.4"
+    "typescript": "^3.2.4",
+    "semantic-release": "^15.13.3"
   }
 }
