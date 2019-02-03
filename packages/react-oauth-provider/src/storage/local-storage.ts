@@ -1,6 +1,6 @@
 import { Data, Storage } from "../types";
 
-export function createStorage(): Storage {
+export async function createStorage(): Promise<Storage> {
   return new LocalStorage();
 }
 
