@@ -1,7 +1,7 @@
 import EventEmitter from "events";
 import qs from "qs";
 
-import { add, isAfter, now } from "./date";
+import { add, diff, isBefore, now } from "./date";
 import { Auth, Client, Config, Data, Storage } from "./types";
 
 const DEFAULT_REFRESH_INTERVAL = 10 * 60 * 1000;
@@ -18,10 +18,11 @@ export enum ProviderEvent {
 }
 
 export class Provider extends EventEmitter {
-  private refreshInterval: number;
   private client: Client;
-  private storage: Storage;
+  private interval: number;
+  private readonly refreshInterval: number;
   private state = ProviderState.Idle;
+  private readonly storage: Storage;
 
   constructor({
     client,
@@ -31,15 +32,25 @@ export class Provider extends EventEmitter {
     super();
 
     this.client = client;
-
     this.storage = storage;
     this.refreshInterval = refreshInterval;
+    this.interval = window.setInterval(async () => {
+      try {
+        await this.refresh();
+      } catch (err) {
+        console.error(err);
+      }
+    }, refreshInterval);
   }
 
   public async authObj(): Promise<Auth> {
     const token = await this.storage.load();
     let isAuthenticated = false;
-    if (token && Provider.isValidToken(token)) {
+    if (
+      token &&
+      Provider.isValidToken(token) &&
+      !Provider.isExpiredToken(token)
+    ) {
       isAuthenticated = true;
     }
     return { isAuthenticated, provider: this };
@@ -81,10 +92,18 @@ export class Provider extends EventEmitter {
     }
     this.state = ProviderState.Refresh;
 
+    // skip if there is no token or invalid
     const token = await this.storage.load();
     if (!(token && Provider.isValidToken(token))) {
       this.state = ProviderState.Idle;
-      throw new Error("Token is missing or invalid. Check storage entries.");
+      return Promise.resolve();
+    }
+
+    // skip if lifetime is more than twice as the refreshInterval
+    const expires = new Date(token.expiresAt);
+    if (diff(expires, now()) > this.refreshInterval * 2) {
+      this.state = ProviderState.Idle;
+      return Promise.resolve();
     }
 
     const { accessToken, refreshToken } = token;
@@ -103,7 +122,7 @@ export class Provider extends EventEmitter {
     const res = await fetch(req);
     if (!res.ok) {
       this.state = ProviderState.Idle;
-      throw new Error("Cannot refresh token.");
+      return Promise.reject("Cannot refresh token.");
     }
     const { access_token, refresh_token, expires_in } = await res.json();
     const expiresAt = add(now(), expires_in);
@@ -125,15 +144,19 @@ export class Provider extends EventEmitter {
     this.state = ProviderState.Idle;
   }
 
-  private static isValidToken(token: Data) {
+  private static isExpiredToken(token: Data) {
+    if (!Provider.isValidToken(token)) {
+      throw new Error("Invalid token");
+    }
+    const expiresAt = new Date(token.expiresAt);
+    return !isBefore(now(), expiresAt);
+  }
+
+  private static isValidToken(token: Data | null) {
     if (!token) {
       return false;
     }
     const { accessToken, refreshToken, expiresAt } = token;
-    if (!(accessToken && refreshToken && expiresAt)) {
-      return false;
-    }
-    const expiresAtDate = new Date(expiresAt);
-    return isAfter(expiresAtDate, now());
+    return accessToken && refreshToken && expiresAt;
   }
 }

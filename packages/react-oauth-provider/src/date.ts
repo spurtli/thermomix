@@ -13,8 +13,16 @@ export function add(date: Date, period: number, unit = Unit.Second) {
   return new Date(date.getTime() + period * unit);
 }
 
+export function diff(date1: Date, date2: Date, unit = Unit.Millisecond) {
+  return (date1.getTime() - date2.getTime()) / unit;
+}
+
 export function isAfter(date: Date, after: Date): boolean {
   return date.getTime() > after.getTime();
+}
+
+export function isBefore(date: Date, before: Date): boolean {
+  return date.getTime() < before.getTime();
 }
 
 export function now(): Date {

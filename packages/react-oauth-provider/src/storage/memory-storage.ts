@@ -1,9 +1,11 @@
 import { Data, Storage } from "../types";
 
-export function createStorage(init: Data | false = false): Storage {
+export async function createStorage(
+  init: Data | false = false
+): Promise<Storage> {
   const storage = new MemoryStorage();
   if (init) {
-    storage.save(init);
+    await storage.save(init);
   }
   return storage;
 }
