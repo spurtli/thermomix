@@ -30,13 +30,13 @@ First you should install.
 **npm**
 
 ```bash
-npm install --save react-oauth-provider
+npm install --save @spurtli/react-oauth-provider
 ```
 
 **yarn**
 
 ```bash
-yarn add react-oauth-provider --save
+yarn add @spurtli/react-oauth-provider --save
 ``` 
 
 This package uses the React [context API](https://reactjs.org/docs/context.html).
