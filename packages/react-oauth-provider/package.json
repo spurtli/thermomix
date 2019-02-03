@@ -1,0 +1,62 @@
+{
+  "name": "react-oauth-provider",
+  "version": "1.0.0",
+  "description": "A context based auth provider for React apps.",
+  "main": "lib/index.js",
+  "module": "lib/index.module.js",
+  "typings": "lib/types/index.d.ts",
+  "scripts": {
+    "build": "rollup -c rollup.config.ts",
+    "lint": "prettier --check src/**/*",
+    "lint:format": "prettier --write src/**/*",
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "test:watch": "jest --watch",
+    "watch": "rollup -c rollup.config.ts --watch"
+  },
+  "precommit": [
+    "lint:format",
+    "test"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/spurtli/react-oauth-provider.git"
+  },
+  "keywords": [
+    "Authentication"
+  ],
+  "author": "Hannes Moser <box@hannesmoser.at>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/spurtli/react-oauth-provider/issues"
+  },
+  "homepage": "https://github.com/spurtli/react-oauth-provider#readme",
+  "dependencies": {
+    "events": "^3.0.0",
+    "qs": "^6.6.0",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-class-properties": "^7.3.0",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.1.0",
+    "@types/jest": "^23.3.13",
+    "@types/qs": "^6.5.1",
+    "@types/react": "^16.7.20",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.8.0",
+    "jest": "^24.0.0",
+    "jest-fetch-mock": "^2.1.0",
+    "lodash.camelcase": "^4.3.0",
+    "prettier": "^1.16.1",
+    "rollup": "^1.1.2",
+    "rollup-plugin-babel": "^4.3.2",
+    "rollup-plugin-commonjs": "^9.2.0",
+    "rollup-plugin-node-resolve": "^4.0.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "typescript": "^3.2.4"
+  }
+}
