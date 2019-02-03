@@ -5,7 +5,12 @@ node_js:
 
 jobs:
   include:
+    - stage: test
+      name: "Unit tests"
+      script: npm run test
     - stage: release
+      name: "Release"
+      script: npm run build
       node_js: lts/*
       deploy:
         provider: script

@@ -1,7 +1,12 @@
+// @ts-ignore
 import babel from "rollup-plugin-babel";
+// @ts-ignore
 import camelCase from "lodash.camelcase";
+// @ts-ignore
 import commonjs from "rollup-plugin-commonjs";
+// @ts-ignore
 import resolve from "rollup-plugin-node-resolve";
+// @ts-ignore
 import sourceMaps from "rollup-plugin-sourcemaps";
 
 const pkg = require("./package.json");
@@ -18,7 +23,9 @@ export default {
       format: "umd",
       sourcemap: true,
       globals: {
-        'react': 'React'
+        react: "React",
+        events: "EventEmitter",
+        qs: "qs"
       }
     },
     { file: pkg.module, format: "es", sourcemap: true }
