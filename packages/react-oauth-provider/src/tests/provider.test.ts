@@ -3,7 +3,7 @@ import "jest-fetch-mock";
 import { client } from "../../test/fixtures/client";
 import { token } from "../../test/fixtures/token";
 
-import { Provider } from "../provider";
+import { Provider, ProviderEvent } from "../provider";
 import { createStorage } from "../storage/memory-storage";
 import { add, now } from "../date";
 
@@ -84,6 +84,68 @@ describe("Provider", () => {
       global.fetch.mockResponse(JSON.stringify(token));
       jest.runOnlyPendingTimers();
       expect(setInterval).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe("Events", () => {
+    beforeEach(() => {
+      global.fetch.resetMocks();
+      global.fetch.mockResponse(JSON.stringify(token));
+    });
+
+    it("should not emit change event", async () => {
+      const storage = await createStorage();
+      const provider = new Provider({
+        client,
+        storage
+      });
+      const onChange = jest.fn();
+      provider.on(ProviderEvent.Change, onChange);
+      expect(onChange).not.toBeCalled();
+    });
+
+    it("should emit change event after authorization", async () => {
+      const storage = await createStorage();
+      const provider = new Provider({
+        client,
+        storage
+      });
+      const onChange = jest.fn();
+      provider.on(ProviderEvent.Change, onChange);
+      await provider.authorize("123");
+      expect(onChange).toBeCalledTimes(1);
+    });
+
+    it("should emit change event after refresh", async () => {
+      const storage = await createStorage({
+        accessToken: "abc123",
+        refreshToken: "abc123",
+        expiresAt: add(now(), 1).toISOString()
+      });
+      const provider = new Provider({
+        client,
+        storage
+      });
+      const onChange = jest.fn();
+      provider.on(ProviderEvent.Change, onChange);
+      await provider.refresh();
+      expect(onChange).not.toBeCalled();
+    });
+
+    it("should emit change event after signOut", async () => {
+      const storage = await createStorage({
+        accessToken: "abc123",
+        refreshToken: "abc123",
+        expiresAt: add(now(), 1).toISOString()
+      });
+      const provider = new Provider({
+        client,
+        storage
+      });
+      const onChange = jest.fn();
+      provider.on(ProviderEvent.Change, onChange);
+      await provider.signOut();
+      expect(onChange).toBeCalledTimes(1);
     });
   });
 
