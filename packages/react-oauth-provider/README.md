@@ -61,27 +61,11 @@ function App() {
 
 ### Context attributes and methods
 
-**authorizationUrl({provider: Provider}): void**
-- *`provider: Provider`* The OAuth provider you want to ask for authorization
-
-Returns a URL for an [authorization request](https://tools.ietf.org/html/rfc6749#page-8).
-In other words, it will allow you to get an authorization URL from the selected
-OAuth provider. Its a helper function, you can also just create a regular anchor
-tag and put any URL in. You have to configure a provider (see below).
-
 **get isAuthenticated(): boolean**
 
 Whether the current user has successfully authenticated with a configured OAuth
 provider or not.
 Any time this value changes, it will trigger a forced update.  
-
-**refresh({force: boolean = false}): void**
-- *`force: boolean`* Force token refresh, even if token is not expired
-
-Refresh an existing token. The OAuth provider has to provide a `refresh_token`
-on token issuance as it has to be stored along with the `access_token` in the
-storage. You might never have to invoke this method yourself. Refresh is an
-automated process in this package.                                                                  
 
 **signOut({revoke: boolean = false}): void**
 - *`revoke: boolean`* Revoke token, defaults to `false`
@@ -95,7 +79,9 @@ the current token.
 
 **save(data: Data}): Promise<void>**
 
-**load(): Promise<Data>**   
+**load(): Promise<Data>**
+
+**delete(): Promise<void>**   
 
 ## Browser compatibility
 
