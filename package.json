@@ -1,6 +1,26 @@
 {
-  "name": "root",
+  "name": "thermomix",
+  "version": "1.0.0",
+  "description": "Spurtli's application utilities",
+  "scripts": {
+    "build": "lerna run build",
+    "check": "lerna run check",
+    "publish": "lerna publish"
+  },
+  "author": "Spurtli",
+  "bugs": {
+    "url": "https://github.com/spurtli/thermomix/issues"
+  },
+  "homepage": "https://github.com/spurtli/thermomixt#readme",
+  "license": "MIT",
   "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spurtli/thermomix.git"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
   "devDependencies": {
     "lerna": "^3.16.4"
   }
