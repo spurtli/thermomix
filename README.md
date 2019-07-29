@@ -1,6 +1,7 @@
 # thermomix
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE.md)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
 ## Usage
 
@@ -8,6 +9,6 @@
 
 ### Package Index
 
-| package   |                          |
-| --------- | ------------------------ |
-| package 1 | [directory](packages/#1) |
+| package              |                                            |
+| -------------------- | ------------------------------------------ |
+| react-oauth-provider | [directory](packages/react-oauth-provider) |
