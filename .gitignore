@@ -1,0 +1,16 @@
+# Dependency directory
+node_modules
+
+# Debug log from lerna
+lerna-debug.log
+
+# Debug logs from yarn
+**/yarn-error.log
+
+# System
+.DS_Store
+Thumbs.db
+
+# IDE
+.idea
+.vscode
