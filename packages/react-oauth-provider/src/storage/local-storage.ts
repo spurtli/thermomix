@@ -1,36 +1,64 @@
-import { Data, Storage } from "../types";
+import {default as moment} from 'moment';
+import {Storage, Record} from './storage';
 
-export async function createStorage(): Promise<Storage> {
-  return new LocalStorage();
+interface SerializedToken {
+  accessToken: string;
+  refreshToken: string;
+  expiresAt: string;
 }
 
-class LocalStorage implements Storage {
-  private static KEY = "_auth_storage";
+export class LocalStorage implements Storage {
+  private static DEFAULT_KEY = 'spurtli-auth';
 
-  delete(): Promise<void> {
-    window.localStorage.removeItem(LocalStorage.KEY);
-    return Promise.resolve();
+  private readonly keyName: string;
+
+  private serialize(record: Record) {
+    return JSON.stringify({
+      accessToken: record.accessToken,
+      refreshToken: record.refreshToken,
+      expiresAt: record.expiresAt.toISOString()
+    });
   }
 
-  load(): Promise<Data | null> {
+  private deserialize(serializedRecord: string): Record {
     try {
-      const json = window.localStorage.getItem(LocalStorage.KEY);
-      if (!json) {
-        return Promise.resolve(null);
-      }
-      return JSON.parse(json);
+      const rawRecord: SerializedToken = JSON.parse(serializedRecord);
+      return {
+        accessToken: rawRecord.accessToken,
+        refreshToken: rawRecord.refreshToken,
+        expiresAt: moment(rawRecord.expiresAt)
+      };
     } catch (err) {
-      return Promise.reject(err);
+      console.error(err);
+      return null;
     }
   }
 
-  save(data: Data): Promise<void> {
-    try {
-      const json = JSON.stringify(data);
-      window.localStorage.setItem(LocalStorage.KEY, json);
-      return Promise.resolve();
-    } catch (err) {
-      return Promise.reject(err);
+  constructor(keyName = LocalStorage.DEFAULT_KEY) {
+    if (!window || !window.localStorage) {
+      throw new Error('window.localStorage is not available.');
     }
+    this.keyName = keyName;
+  }
+
+  load(): Record {
+    const data = window.localStorage.getItem(this.keyName);
+    if (!data) {
+      return null;
+    }
+
+    return this.deserialize(data);
+  }
+
+  reset() {
+    window.localStorage.removeItem(this.keyName);
+  }
+
+  save(record: Record) {
+    if (!record) {
+      console.warn('Cannot save empty record');
+    }
+
+    window.localStorage.setItem(this.keyName, this.serialize(record));
   }
 }
