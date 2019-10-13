@@ -1,7 +1,7 @@
-import { useContext } from "react";
-import { context as authContext } from "./";
+import {useContext} from "react";
+import {context as authContext} from "./context";
 
 export function useProtection() {
-  const { isAuthenticated, signOut } = useContext(authContext);
-  return { isAuthenticated, signOut };
+  const {isAuthenticated, signOut} = useContext(authContext);
+  return {isAuthenticated, signOut};
 }

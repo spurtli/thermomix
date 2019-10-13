@@ -9,11 +9,11 @@
     "build": "rollup -c rollup.config.ts",
     "lint": "prettier --check src/**/*",
     "lint:format": "prettier --write src/**/*",
+    "semantic-release": "semantic-release",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
-    "watch": "rollup -c rollup.config.ts --watch",
-    "semantic-release": "semantic-release"
+    "watch": "rollup -c rollup.config.ts --watch"
   },
   "precommit": [
     "lint:format",
@@ -31,39 +31,54 @@
     "React",
     "OAuth"
   ],
-  "author": "Hannes Moser <box@hannesmoser.at>",
+  "author": "Spurtli <hello@spurtli.com> (https://spurtli.com)",
+  "contributors": [
+    {
+      "name": "Hannes Moser",
+      "email": "box@hannesmoser.at",
+      "url": "https://hannesmoser.at/"
+    },
+    {
+      "name": "Neele Barthel",
+      "email": "hello@neele.codes",
+      "url": "https://neele.codes/"
+    }
+  ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/spurtli/react-oauth-provider/issues"
+    "url": "https://github.com/spurtli/issues"
   },
-  "homepage": "https://github.com/spurtli/react-oauth-provider#readme",
+  "homepage": "https://github.com/spurtli/thermomix/blob/master/packages/react-oauth-provider/README.md",
   "dependencies": {
     "events": "^3.0.0",
     "moment": "^2.24.0",
-    "qs": "^6.8.0"
+    "qs": "^6.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.0",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0",
-    "@babel/preset-typescript": "^7.1.0",
-    "@types/jest": "^24.0.16",
-    "@types/qs": "^6.5.1",
-    "@types/react": "^16.7.20",
-    "enzyme": "^3.8.0",
-    "enzyme-adapter-react-16": "^1.8.0",
-    "jest": "^24.0.0",
-    "jest-fetch-mock": "^2.1.0",
+    "@babel/core": "^7.6.4",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.6.3",
+    "@babel/preset-react": "^7.6.3",
+    "@babel/preset-typescript": "^7.6.0",
+    "@types/enzyme": "^3.10.3",
+    "@types/jest": "^24.0.18",
+    "@types/qs": "^6.5.3",
+    "@types/react": "^16.9.5",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "jest": "^24.9.0",
+    "jest-fetch-mock": "^2.1.2",
     "lodash.camelcase": "^4.3.0",
-    "prettier": "^1.16.1",
-    "rollup": "^1.1.2",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-commonjs": "^9.2.0",
-    "rollup-plugin-node-resolve": "^4.0.0",
+    "prettier": "^1.18.2",
+    "react": "^16.10.2",
+    "react-dom": "^16.10.2",
+    "rollup": "^1.23.1",
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "semantic-release": "^15.13.3",
-    "typescript": "^3.2.4"
+    "semantic-release": "^15.13.24",
+    "typescript": "^3.6.4"
   },
   "peerDependencies": {
     "react": "^16.10.2",

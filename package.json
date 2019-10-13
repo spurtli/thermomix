@@ -7,7 +7,19 @@
     "check": "lerna run check",
     "publish": "lerna publish"
   },
-  "author": "Spurtli",
+  "author": "Spurtli <hello@spurtli.com> (https://spurtli.com)",
+  "contributors": [
+    {
+      "name": "Hannes Moser",
+      "email": "box@hannesmoser.at",
+      "url": "https://hannesmoser.at/"
+    },
+    {
+      "name": "Neele Barthel",
+      "email": "hello@neele.codes",
+      "url": "https://neele.codes/"
+    }
+  ],
   "bugs": {
     "url": "https://github.com/spurtli/thermomix/issues"
   },
