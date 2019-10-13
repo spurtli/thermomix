@@ -2,6 +2,6 @@ import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import jestMockFetch from "jest-fetch-mock";
 
-Enzyme.configure({ adapter: new Adapter() });
+Enzyme.configure({adapter: new Adapter()});
 
-global.fetch = jestMockFetch
+global.fetch = jestMockFetch;

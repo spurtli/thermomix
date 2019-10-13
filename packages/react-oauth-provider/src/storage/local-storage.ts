@@ -1,5 +1,5 @@
-import {default as moment} from 'moment';
-import {Storage, Record} from './storage';
+import {default as moment} from "moment";
+import {Storage, Record} from "./types";
 
 interface SerializedToken {
   accessToken: string;
@@ -8,7 +8,7 @@ interface SerializedToken {
 }
 
 export class LocalStorage implements Storage {
-  private static DEFAULT_KEY = 'spurtli-auth';
+  private static DEFAULT_KEY = "spurtli-auth";
 
   private readonly keyName: string;
 
@@ -36,7 +36,7 @@ export class LocalStorage implements Storage {
 
   constructor(keyName = LocalStorage.DEFAULT_KEY) {
     if (!window || !window.localStorage) {
-      throw new Error('window.localStorage is not available.');
+      throw new Error("window.localStorage is not available.");
     }
     this.keyName = keyName;
   }
@@ -56,7 +56,7 @@ export class LocalStorage implements Storage {
 
   save(record: Record) {
     if (!record) {
-      console.warn('Cannot save empty record');
+      console.warn("Cannot save empty record");
     }
 
     window.localStorage.setItem(this.keyName, this.serialize(record));

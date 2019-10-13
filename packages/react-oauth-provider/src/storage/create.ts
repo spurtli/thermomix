@@ -1,6 +1,6 @@
-import {LocalStorage} from './local-storage';
-import {MemoryStorage} from './memory';
-import {Storage} from './storage';
+import {LocalStorage} from "./local-storage";
+import {MemoryStorage} from "./memory";
+import {Storage} from "./types";
 
 export enum StorageType {
   AUTO,
