@@ -1,13 +1,13 @@
-import EventEmitter from "events";
-import moment from "moment";
-import qs from "qs";
+import EventEmitter from 'events';
+import moment from 'moment';
+import qs from 'qs';
 
-import { Record, Storage } from "./storage";
-import { OAuthProvider } from "./";
+import {Record, Storage} from './storage';
+import {OAuthProvider} from './';
 
 export enum AuthEvent {
-  Authenticated = "authenticated",
-  Unauthenticated = "unauthenticated"
+  Authenticated = 'authenticated',
+  Unauthenticated = 'unauthenticated'
 }
 
 export class Service {
@@ -56,7 +56,7 @@ export class Service {
     if (!token) {
       return false;
     }
-    const { accessToken, refreshToken, expiresAt } = token;
+    const {accessToken, refreshToken, expiresAt} = token;
     return !!(accessToken && refreshToken && expiresAt);
   }
 
@@ -64,18 +64,24 @@ export class Service {
     return this.storage.load();
   }
 
-  public async exchangeCodeForToken(authorizationCode: { code: string }) {
-    const response = await fetch(this.primaryAuthorizationProvider.tokenUrl, {
+  public async exchangeCodeForToken(authorizationCode: {code: string}) {
+    const {tokenUrl} = this.primaryAuthorizationProvider;
+
+    if (!tokenUrl) {
+      return Promise.reject(`Do not have a valid tokenUrl: ${tokenUrl}`);
+    }
+
+    const response = await fetch(tokenUrl, {
       body: JSON.stringify({
         client_id: this.primaryAuthorizationProvider.clientId,
-        grant_type: "assertion",
-        provider: "strava",
+        grant_type: 'assertion',
+        provider: 'strava',
         assertion: authorizationCode.code
       }),
       headers: {
-        "content-type": "application/json"
+        'content-type': 'application/json'
       },
-      method: "POST"
+      method: 'POST'
     });
 
     if (!response.ok) {
@@ -94,21 +100,27 @@ export class Service {
 
   public async refreshToken() {
     if (!this.hasToken()) {
-      return Promise.reject("Cannot find token to refresh.");
+      return Promise.reject('Cannot find token to refresh.');
     }
 
-    const { accessToken, refreshToken } = this.storage.load();
-    const response = await fetch(this._primaryAuthorizationProvider.tokenUrl, {
+    const {tokenUrl} = this._primaryAuthorizationProvider;
+
+    if (!tokenUrl) {
+      return Promise.reject(`Do not have a valid tokenUrl: ${tokenUrl}`);
+    }
+
+    const {accessToken, refreshToken} = this.storage.load();
+    const response = await fetch(tokenUrl, {
       body: qs.stringify({
-        grant_type: "refresh_token",
+        grant_type: 'refresh_token',
         refresh_token: refreshToken,
         client_id: this._primaryAuthorizationProvider.clientId
       }),
       headers: {
         authorization: `Bearer ${accessToken}`,
-        "content-type": "application/x-www-form-urlencoded"
+        'content-type': 'application/x-www-form-urlencoded'
       },
-      method: "POST"
+      method: 'POST'
     });
 
     if (!response.ok) {
@@ -124,23 +136,26 @@ export class Service {
   }
 
   public async revokeToken() {
+    const {revokeUrl} = this._primaryAuthorizationProvider;
+
+    if (!revokeUrl) {
+      return Promise.reject(`Do not have a valid revokeUrl: ${revokeUrl}`);
+    }
+
     // try to revoke token on primary authorization service
     if (this.hasValidToken()) {
-      const { accessToken } = this.getToken();
-      const response = await fetch(
-        this._primaryAuthorizationProvider.revokeUrl,
-        {
-          body: qs.stringify({
-            token: accessToken,
-            token_type_hint: "access_token"
-          }),
-          headers: {
-            authorization: `Bearer ${accessToken}`,
-            "content-type": "application/x-www-form-urlencoded"
-          },
-          method: "POST"
-        }
-      );
+      const {accessToken} = this.getToken();
+      const response = await fetch(revokeUrl, {
+        body: qs.stringify({
+          token: accessToken,
+          token_type_hint: 'access_token'
+        }),
+        headers: {
+          authorization: `Bearer ${accessToken}`,
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: 'POST'
+      });
 
       if (!response.ok) {
         console.warn(`Cannot revoke token: ${accessToken}`);
@@ -156,7 +171,7 @@ export class Service {
     return {
       accessToken: raw.access_token,
       refreshToken: raw.refresh_token,
-      expiresAt: moment().add(raw.expires_in, "seconds")
+      expiresAt: moment().add(raw.expires_in, 'seconds')
     };
   }
 }

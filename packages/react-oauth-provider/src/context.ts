@@ -1,6 +1,6 @@
-import {createContext} from "react";
-import {default as moment} from "moment";
-import {Record} from "./storage";
+import {createContext} from 'react';
+import {default as moment} from 'moment';
+import {Record} from './storage';
 
 interface AuthContext extends Record {
   isAuthenticated: boolean;
@@ -8,8 +8,8 @@ interface AuthContext extends Record {
 }
 
 const defaultAuthValues: AuthContext = {
-  accessToken: "",
-  refreshToken: "",
+  accessToken: '',
+  refreshToken: '',
   expiresAt: moment(),
   isAuthenticated: false,
   signOut: () => {}

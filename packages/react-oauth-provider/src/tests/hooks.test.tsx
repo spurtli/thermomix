@@ -1,6 +1,6 @@
-import React from "react";
-import {shallow} from "enzyme";
-import {useProtection} from "../hook";
+import React from 'react';
+import {shallow} from 'enzyme';
+import {useProtection} from '../hook';
 
 function HookWrapper() {
   const {isAuthenticated} = useProtection();
@@ -11,10 +11,10 @@ function HookWrapper() {
   return <>logged out</>;
 }
 
-describe("useProtection()", () => {
-  it("returns isAuthenticated false when a user is not authenticated", () => {
+describe('useProtection()', () => {
+  it('returns isAuthenticated false when a user is not authenticated', () => {
     let wrapper = shallow(<HookWrapper />);
 
-    expect(wrapper.text()).toEqual("logged out");
+    expect(wrapper.text()).toEqual('logged out');
   });
 });
