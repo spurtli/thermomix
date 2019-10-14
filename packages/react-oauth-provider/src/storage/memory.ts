@@ -1,4 +1,4 @@
-import {Storage, Record} from "./types";
+import {Storage, Record} from './types';
 
 export class MemoryStorage implements Storage {
   private record: Record = null;

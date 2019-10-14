@@ -1,9 +1,10 @@
-import React, { ReactNode, useEffect, useState } from "react";
-import qs from "qs";
+import React, {ReactNode, useEffect, useState} from 'react';
+import moment from 'moment';
+import qs from 'qs';
 
-import { context } from "./context";
-import { Record } from "./storage";
-import { AuthEvent, Service as AuthService } from "./service";
+import {context} from './context';
+import {Record} from './storage';
+import {AuthEvent, Service as AuthService} from './service';
 
 interface AuthProviderProps {
   children?: ReactNode;
@@ -11,13 +12,13 @@ interface AuthProviderProps {
 }
 
 const unauthenticated: Record = {
-  accessToken: null,
-  refreshToken: null,
-  expiresAt: null
+  accessToken: '',
+  refreshToken: '',
+  expiresAt: moment(0)
 };
 
 export function AuthProvider(props: AuthProviderProps) {
-  const { service } = props;
+  const {service} = props;
   const [auth, setAuth] = useState(unauthenticated);
 
   function onAuthentication() {
@@ -41,13 +42,13 @@ export function AuthProvider(props: AuthProviderProps) {
         }
       } catch (err) {
         console.error(
-          "There was a valid token, but refresh failed. Signing out now!"
+          'There was a valid token, but refresh failed. Signing out now!'
         );
         await service.revokeToken();
       }
 
-      const { search } = window.location;
-      const authorization = qs.parse(search, { ignoreQueryPrefix: true });
+      const {search} = window.location;
+      const authorization = qs.parse(search, {ignoreQueryPrefix: true});
       if (!!(authorization.code && authorization.scope)) {
         const token = await service.exchangeCodeForToken(authorization);
         setAuth(token);
@@ -83,7 +84,7 @@ export function AuthProvider(props: AuthProviderProps) {
     signOut
   };
 
-  const { children } = props;
-  const { Provider } = context;
+  const {children} = props;
+  const {Provider} = context;
   return <Provider value={value}>{children}</Provider>;
 }

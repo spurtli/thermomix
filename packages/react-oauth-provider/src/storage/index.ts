@@ -1,2 +1,2 @@
-export {create} from "./create";
-export {Record, Storage} from "./types";
+export {create} from './create';
+export {Record, Storage} from './types';

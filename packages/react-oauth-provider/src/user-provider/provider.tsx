@@ -1,6 +1,6 @@
-import React, {ReactNode} from "react";
-import {UserContext} from "./context";
-import {UserContextType} from "./types";
+import React, {ReactNode} from 'react';
+import {UserContext} from './context';
+import {UserContextType} from './types';
 
 interface Props<T> {
   children: ReactNode;
