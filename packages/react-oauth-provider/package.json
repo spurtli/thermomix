@@ -7,9 +7,6 @@
   "typings": "lib/types/index.d.ts",
   "scripts": {
     "build": "rollup -c rollup.config.ts",
-    "test": "jest",
-    "test:coverage": "jest --coverage",
-    "test:watch": "jest --watch",
     "watch": "rollup -c rollup.config.ts --watch"
   },
   "precommit": [
@@ -51,30 +48,15 @@
     "qs": "^6.9.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.6.4",
-    "@babel/plugin-proposal-class-properties": "^7.5.5",
-    "@babel/preset-env": "^7.6.3",
-    "@babel/preset-react": "^7.6.3",
-    "@babel/preset-typescript": "^7.6.0",
-    "@types/enzyme": "^3.10.3",
-    "@types/jest": "^24.0.18",
     "@types/qs": "^6.5.3",
-    "@types/react": "^16.9.5",
-    "enzyme": "^3.10.0",
-    "enzyme-adapter-react-16": "^1.15.1",
-    "jest": "^24.9.0",
-    "jest-fetch-mock": "^2.1.2",
     "lodash.camelcase": "^4.3.0",
-    "react": "^16.10.2",
-    "react-dom": "^16.10.2",
     "rollup": "^1.23.1",
     "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^5.2.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.24.3",
-    "typescript": "^3.6.4"
+    "rollup-plugin-typescript2": "^0.24.3"
   },
   "peerDependencies": {
     "react": "^16.10.2",
