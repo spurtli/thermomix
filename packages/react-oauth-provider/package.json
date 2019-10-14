@@ -7,8 +7,6 @@
   "typings": "lib/types/index.d.ts",
   "scripts": {
     "build": "rollup -c rollup.config.ts",
-    "lint": "prettier --check 'src/**/*'",
-    "lint:format": "prettier --write 'src/**/*'",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch",
@@ -67,7 +65,6 @@
     "jest": "^24.9.0",
     "jest-fetch-mock": "^2.1.2",
     "lodash.camelcase": "^4.3.0",
-    "prettier": "^1.18.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "rollup": "^1.23.1",
