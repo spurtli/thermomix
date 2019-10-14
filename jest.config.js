@@ -1,10 +1,10 @@
 module.exports = {
   clearMocks: true,
-  coverageDirectory: "coverage",
+  coverageDirectory: 'coverage',
 
-  setupFiles: ["<rootDir>config/jest.js"],
+  setupFiles: ['<rootDir>config/jest.js'],
 
-  moduleFileExtensions: ["js", "ts", "tsx"]
+  moduleFileExtensions: ['js', 'ts', 'tsx']
 
   // testMatch: [
   //   "**/__tests__/**/*.[jt]s?(x)",
