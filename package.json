@@ -5,6 +5,8 @@
   "scripts": {
     "build": "lerna run build",
     "check": "lerna run check",
+    "lint": "prettier --check '**/*.{ts,tsx}'",
+    "lint:format": "prettier --write '**/*.{ts,tsx}'",
     "publish": "lerna publish"
   },
   "author": "Spurtli <hello@spurtli.com> (https://spurtli.com)",
@@ -34,6 +36,7 @@
     "packages/*"
   ],
   "devDependencies": {
-    "lerna": "^3.17.0"
+    "lerna": "^3.17.0",
+    "prettier": "^1.18.2"
   }
 }
