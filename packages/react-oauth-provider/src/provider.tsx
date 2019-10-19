@@ -17,8 +17,7 @@ const unauthenticated: Record = {
   expiresAt: moment(0)
 };
 
-export function AuthProvider(props: AuthProviderProps) {
-  const {service} = props;
+export function AuthProvider({children, service}: AuthProviderProps) {
   const [auth, setAuth] = useState(unauthenticated);
 
   function onAuthentication() {
@@ -84,7 +83,7 @@ export function AuthProvider(props: AuthProviderProps) {
     signOut
   };
 
-  const {children} = props;
   const {Provider} = context;
+  console.log('hello');
   return <Provider value={value}>{children}</Provider>;
 }

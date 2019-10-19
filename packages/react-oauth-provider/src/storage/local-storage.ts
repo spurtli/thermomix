@@ -30,7 +30,11 @@ export class LocalStorage implements Storage {
       };
     } catch (err) {
       console.error(err);
-      return null;
+      return {
+        accessToken: '',
+        refreshToken: '',
+        expiresAt: moment(0)
+      };
     }
   }
 
@@ -44,7 +48,11 @@ export class LocalStorage implements Storage {
   load(): Record {
     const data = window.localStorage.getItem(this.keyName);
     if (!data) {
-      return null;
+      return {
+        accessToken: '',
+        refreshToken: '',
+        expiresAt: moment(0)
+      };
     }
 
     return this.deserialize(data);

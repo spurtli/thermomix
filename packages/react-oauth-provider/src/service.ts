@@ -3,7 +3,7 @@ import moment from 'moment';
 import qs from 'qs';
 
 import {Record, Storage} from './storage';
-import {OAuthProvider} from './';
+import {Provider as OAuthProvider} from './types';
 
 export enum AuthEvent {
   Authenticated = 'authenticated',

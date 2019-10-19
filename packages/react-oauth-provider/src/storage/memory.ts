@@ -1,14 +1,23 @@
+import moment from 'moment';
 import {Storage, Record} from './types';
 
 export class MemoryStorage implements Storage {
-  private record: Record = null;
+  private record: Record = {
+    accessToken: '',
+    refreshToken: '',
+    expiresAt: moment(0)
+  };
 
   load(): Record {
     return this.record;
   }
 
   reset() {
-    this.record = null;
+    this.record = {
+      accessToken: '',
+      refreshToken: '',
+      expiresAt: moment(0)
+    };
   }
 
   save(record: Record) {
