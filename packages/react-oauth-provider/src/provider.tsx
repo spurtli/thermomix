@@ -84,6 +84,5 @@ export function AuthProvider({children, service}: AuthProviderProps) {
   };
 
   const {Provider} = context;
-  console.log('hello');
   return <Provider value={value}>{children}</Provider>;
 }
