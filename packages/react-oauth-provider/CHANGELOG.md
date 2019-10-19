@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.5](https://github.com/spurtli/thermomix/compare/@spurtli/react-oauth-provider@1.0.3...@spurtli/react-oauth-provider@1.0.5) (2019-10-19)
+
+
+### Bug Fixes
+
+* 🐛 remove log statement ([e028f7c](https://github.com/spurtli/thermomix/commit/e028f7cfd99b48c8353e48bdb106993bc02589d4))
+* 🐛 update types and imports ([d54429a](https://github.com/spurtli/thermomix/commit/d54429a824c96775b8b82483ce68be91ed166099))
+
+
+
+
+
 ## [1.0.4](https://github.com/spurtli/thermomix/compare/@spurtli/react-oauth-provider@1.0.3...@spurtli/react-oauth-provider@1.0.4) (2019-10-19)
 
 

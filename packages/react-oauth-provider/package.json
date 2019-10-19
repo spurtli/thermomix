@@ -1,6 +1,6 @@
 {
   "name": "@spurtli/react-oauth-provider",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A context based auth provider for React apps.",
   "main": "lib/index.js",
   "module": "lib/index.module.js",
